@@ -21,11 +21,10 @@ if __name__ == "__main__":
     print Person.all()
 
     # Find that person
-    print p.get(id="123")
+    print Person.get(id="123")
 
     # Delete it
-    p.delete(id="123")
-    print p.get(id="123")
-
+    Person.delete(id="123")
+    print Person.get(id="123")
 
 ```
