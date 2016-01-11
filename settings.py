@@ -1,0 +1,3 @@
+MODEL_DIR = "data"
+FILE_EXTENTION = '.csv'
+SEPARATOR = "|"
