@@ -1,6 +1,6 @@
 # Python CSV ORM
 
-## Example:
+### Example:
 
 ```python
 class Person(CSVModel):
