@@ -1,7 +1,7 @@
 import os
 import helpers
 import settings
-from relations import HasOne, HasMany
+from relations import HasOne, HasMany, Relation
 
 
 class CSVModel(object):
@@ -79,14 +79,16 @@ class CSVModel(object):
             temp = cls()
             tokens = line.split(settings.SEPARATOR)
             for i in range(len(tokens)):
-                if isinstance(getattr(temp, attributes[i].strip()), HasOne):
-                    val = getattr(temp, attributes[i].strip()).get(tokens[i].strip())[0]
+                attr = getattr(temp, attributes[i].strip())
+
+                if isinstance(attr, Relation):
+                    val = attr.get(id=tokens[i].strip())
                     setattr(temp, attributes[i].strip(), val)
-                elif isinstance(getattr(temp, attributes[i].strip()), HasMany):
-                    val = getattr(temp, attributes[i].strip()).get(tokens[i].strip())
-                    setattr(temp, attributes[i].strip(), val)
+
                 else:
-                    setattr(temp, attributes[i].strip(), tokens[i].strip())
+                    attr.set(tokens[i].strip())
+                    print attr
+                    setattr(temp, attributes[i].strip(), attr)
             objects.append(temp)
         return objects
 

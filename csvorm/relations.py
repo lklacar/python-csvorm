@@ -7,14 +7,23 @@ class Relation(object):
     def __init__(self, cls):
         self.cls = cls
 
+    def get(self, **kwargs):
+        pass
+
+    def set(self, **kwargs):
+        pass
+
 
 class HasOne(Relation):
-    def get(self, id):
-        return self.cls.get(id=id)
+    def get(self, **kwargs):
+        id = kwargs['id']
+        return self.cls.get(id=id)[0]
 
 
 class HasMany(Relation):
-    def get(self, id):
+    def get(self, **kwargs):
+        id = kwargs['id']
+
         value = []
         tokens = id.split(",")
 
